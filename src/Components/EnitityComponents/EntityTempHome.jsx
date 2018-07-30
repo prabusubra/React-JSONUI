@@ -5,7 +5,8 @@ import FlatTable from "../FlatTable/FlatTable";
 
 class EntityTempHome extends React.Component {
   state = {
-    showComponent: false
+    showComponent: false,
+    data: []
   };
   doattronclick = () => {
     this.setState({
@@ -19,13 +20,22 @@ class EntityTempHome extends React.Component {
       showComponent: false
     });
   };
+  componentWillMount() {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        this.setState({ data: json });
+      });
+  }
+
   render() {
-    let header = ["name", "id", "city", "pin"];
-    let data = [
+    let header = ["id", "name", "username", "email", "address"];
+    /*let data = [
       { name: "prabu", id: "001", city: "Blore", pin: "560028" },
       { name: "Ram", id: "002", city: "chennai", pin: "560028" },
       { name: "Bill", id: "003", city: "CA", pin: "7368" }
-    ];
+    ];*/
 
     return (
       <div>
@@ -33,7 +43,7 @@ class EntityTempHome extends React.Component {
           Create
         </button>
         {!this.state.showComponent ? (
-          <FlatTable header={header} data={data} />
+          <FlatTable header={header} data={this.state.data} />
         ) : null}
         {this.state.showComponent ? <EntityTempForm /> : null}
         {this.state.showComponent ? (

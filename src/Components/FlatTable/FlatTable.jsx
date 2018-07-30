@@ -8,6 +8,7 @@ class FlatTable extends Component {
     data: this.props.data || []
   };
   render() {
+    this.state.data = this.props.data;
     let tableheader = [];
     this.state.header.forEach((element, index) => {
       tableheader.push(<FlatTableHeader key={index} header={element} />);
