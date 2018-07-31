@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AttrTempForm from "./AttrTempForm";
-import AttrSubmit from "./AttrSubmit";
 import FlatTable from "../FlatTable/FlatTable";
+import CreateEntity from "../common/CreateEntity";
 
 class createattr extends React.Component {
   state = {
@@ -39,15 +39,14 @@ class createattr extends React.Component {
 
     return (
       <div>
-        <button className="btn btn-primary m-4" onClick={this.doattronclick}>
-          Create
-        </button>
+        {!this.state.showComponent ? (
+          <CreateEntity doOnClick={this.doattronclick} />
+        ) : null}
         {!this.state.showComponent ? (
           <FlatTable header={header} data={this.state.data} />
         ) : null}
-        {this.state.showComponent ? <AttrTempForm /> : null}
         {this.state.showComponent ? (
-          <AttrSubmit onSubmit={this.handleOnSubmit} />
+          <AttrTempForm onSubmit={this.handleOnSubmit} />
         ) : null}
       </div>
     );

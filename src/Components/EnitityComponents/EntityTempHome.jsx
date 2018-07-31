@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import EntityTempForm from "./EntityTempForm";
-import EntityTempSubmit from "./EntityTempSubmit";
 import FlatTable from "../FlatTable/FlatTable";
+import CreateEntity from "../common/CreateEntity";
 
 class EntityTempHome extends React.Component {
   state = {
@@ -9,6 +9,7 @@ class EntityTempHome extends React.Component {
     data: []
   };
   doattronclick = () => {
+    console.log("I am in boss......");
     this.setState({
       showComponent: true
     });
@@ -39,15 +40,14 @@ class EntityTempHome extends React.Component {
 
     return (
       <div>
-        <button className="btn btn-primary m-4" onClick={this.doattronclick}>
-          Create
-        </button>
+        {!this.state.showComponent ? (
+          <CreateEntity doOnClick={this.doattronclick} />
+        ) : null}
         {!this.state.showComponent ? (
           <FlatTable header={header} data={this.state.data} />
         ) : null}
-        {this.state.showComponent ? <EntityTempForm /> : null}
         {this.state.showComponent ? (
-          <EntityTempSubmit onSubmit={this.handleOnSubmit} />
+          <EntityTempForm onSubmit={this.handleOnSubmit} />
         ) : null}
       </div>
     );

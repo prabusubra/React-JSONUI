@@ -90,6 +90,9 @@ class EntityTempForm extends Component {
             />
           </div>
         </form>
+        <button className="btn btn-primary m-4" onClick={this.props.onSubmit}>
+          Submit
+        </button>
       </div>
     );
   }
