@@ -4,7 +4,10 @@ class CreateEntity extends Component {
   state = {};
   render() {
     return (
-      <button className="btn btn-primary m-4" onClick={this.props.doOnClick}>
+      <button
+        className="btn btn-outline-primary m-4"
+        onClick={this.props.doOnClick}
+      >
         Create
       </button>
     );

@@ -16,21 +16,26 @@ class createattr extends React.Component {
 
   handleOnSubmit = () => {
     console.log(" On Submit...");
+
     this.setState({
       showComponent: false
     });
+    this.getRESTData();
   };
   componentWillMount() {
-    fetch("https://jsonplaceholder.typicode.com/comments")
+    this.getRESTData();
+  }
+  getRESTData = () => {
+    console.log("I am going to get a data from rest...");
+    fetch("https://jsonplaceholder.typicode.com/posts")
       .then(response => response.json())
       .then(json => {
         console.log(json);
         this.setState({ data: json });
       });
-  }
-
+  };
   render() {
-    let header = ["postId", "id", "name", "email", "body"];
+    let header = ["userId", "id", "title", "body"];
     /*let data = [
       { name: "prabu", id: "001", city: "Blore", pin: "560028" },
       { name: "Ram", id: "002", city: "chennai", pin: "560028" },

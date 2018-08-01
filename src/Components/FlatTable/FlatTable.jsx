@@ -9,11 +9,6 @@ class FlatTable extends Component {
   };
   render() {
     this.state.data = this.props.data;
-    let tableheader = [];
-    this.state.header.forEach((element, index) => {
-      tableheader.push(<FlatTableHeader key={index} header={element} />);
-    });
-
     let tablerow = [];
     this.state.data.forEach((element, index) => {
       tablerow.push(
@@ -23,11 +18,25 @@ class FlatTable extends Component {
 
     return (
       <div>
-        <table className="table table-striped">
+        <table className="table-responsive-xl table-bordered">
           <thead>
-            <tr>{tableheader}</tr>
+            <tr>
+              {this.state.header.map((element, index) => {
+                return <FlatTableHeader key={index} header={element} />;
+              })}
+            </tr>
           </thead>
-          <tbody>{tablerow}</tbody>
+          <tbody>
+            {this.state.data.map((element, index) => {
+              return (
+                <FlatTableRow
+                  key={index}
+                  header={this.state.header}
+                  data={element}
+                />
+              );
+            })}
+          </tbody>
         </table>
       </div>
     );
