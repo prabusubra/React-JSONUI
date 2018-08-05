@@ -5,8 +5,6 @@ class FlatTableHeader extends Component {
     header: this.props.header
   };
   render() {
-    console.log(this.state.header);
-
     return <th>{this.state.header}</th>;
   }
 }

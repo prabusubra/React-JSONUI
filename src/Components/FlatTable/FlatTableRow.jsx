@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import FlatTableData from "./FlatTableData";
-
+import Properties from "../EnitityComponents/Properties";
 class FlatTableRow extends Component {
   state = {
     header: this.props.header,
@@ -11,9 +11,12 @@ class FlatTableRow extends Component {
     console.log(e.target.value);
   };
 
+  /* showProperties = tabledata => {
+    console.log("showProperties" + tabledata);
+    return <Properties key={tabledata} data={tabledata} />;
+  }; */
+
   render() {
-    console.log(this.state.header);
-    console.log(this.state.data);
     return (
       <tr>
         {this.state.header.map((element, index) => {
@@ -24,6 +27,7 @@ class FlatTableRow extends Component {
               header={element}
               doOnDelete={this.processOnClick}
               doOnModify={this.processOnClick}
+              showProperties={this.props.showProperties}
             />
           );
         })}

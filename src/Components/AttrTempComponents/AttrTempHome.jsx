@@ -26,7 +26,6 @@ class createattr extends React.Component {
     this.getRESTData();
   }
   getRESTData = () => {
-    console.log("I am going to get a data from rest...");
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then(response => response.json())
       .then(json => {

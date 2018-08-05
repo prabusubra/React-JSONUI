@@ -22,6 +22,9 @@ class AttrTempForm extends Component {
     console.log(this.props);
     return (
       <div className="m-4">
+        <button className="btn btn-primary m-4" onClick={this.props.onSubmit}>
+          Back
+        </button>
         <form className="m-4">
           <div className="form-group">
             <label htmlFor={"name"}> Name </label>{" "}
@@ -125,10 +128,10 @@ class AttrTempForm extends Component {
               onChange={this.setPropertyVersion}
             />
           </div>
+          <button className="btn btn-primary m-4" onClick={this.props.onSubmit}>
+            Submit
+          </button>
         </form>
-        <button className="btn btn-primary m-4" onClick={this.props.onSubmit}>
-          Submit
-        </button>
       </div>
     );
   }
@@ -139,7 +142,9 @@ class AttrTempForm extends Component {
   };
   //setters
   setPropertyName = e => {
-    this.setState({ name: e.target.value });
+    this.setState((prevState, props) => {
+      if (prevState != e.target.value) return { name: e.target.value };
+    });
   };
 
   setPropertyDescription = e => {

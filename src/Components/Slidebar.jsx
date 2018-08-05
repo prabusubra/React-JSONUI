@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AttrTempHome from "./AttrTempComponents/AttrTempHome";
 import EntityTempHome from "./EnitityComponents/EntityTempHome";
+import Understandings from "./Learning/Understandings";
 
 class Slidebar extends Component {
   state = {
@@ -15,9 +16,15 @@ class Slidebar extends Component {
         path: "/domain",
         exact: true,
         main: () => <EntityTempHome />
+      },
+      {
+        path: "/learning",
+        exact: true,
+        main: () => <Understandings />
       }
     ]
   };
+
   render() {
     return (
       <Router>
@@ -35,6 +42,9 @@ class Slidebar extends Component {
               </li>
               <li>
                 <Link to="/domain">Domain Template</Link>
+              </li>
+              <li>
+                <Link to="/learning">Learnings...</Link>
               </li>
             </ul>
           </div>

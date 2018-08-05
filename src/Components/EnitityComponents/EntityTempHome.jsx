@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import EntityTempForm from "./EntityTempForm";
 import FlatTable from "../FlatTable/FlatTable";
 import CreateEntity from "../common/CreateEntity";
+import Properties from "../EnitityComponents/Properties";
 
 class EntityTempHome extends React.Component {
   state = {
     showComponent: false,
+    showProperties: false,
     data: []
   };
   doattronclick = () => {
-    console.log("I am in boss......");
     this.setState({
       showComponent: true
     });
@@ -29,28 +30,38 @@ class EntityTempHome extends React.Component {
         this.setState({ data: json });
       });
   }
-
-  render() {
+  showProperties = tabledata => {
+    this.setState({
+      showProperties: true
+    });
+    console.log("showProperties" + tabledata);
+    return <Properties key={tabledata} data={tabledata} />;
+  };
+  getRender = () => {
     let header = ["id", "name", "username", "email", "address"];
+    if (this.state.showComponent) {
+      return <EntityTempForm onSubmit={this.handleOnSubmit} />;
+    } else {
+      return (
+        <React.Fragment>
+          {" "}
+          <CreateEntity doOnClick={this.doattronclick} />,
+          <FlatTable
+            header={header}
+            data={this.state.data}
+            showProperties={this.showProperties}
+          />{" "}
+        </React.Fragment>
+      );
+    }
+  };
+  render() {
     /*let data = [
       { name: "prabu", id: "001", city: "Blore", pin: "560028" },
       { name: "Ram", id: "002", city: "chennai", pin: "560028" },
       { name: "Bill", id: "003", city: "CA", pin: "7368" }
     ];*/
-
-    return (
-      <div>
-        {!this.state.showComponent ? (
-          <CreateEntity doOnClick={this.doattronclick} />
-        ) : null}
-        {!this.state.showComponent ? (
-          <FlatTable header={header} data={this.state.data} />
-        ) : null}
-        {this.state.showComponent ? (
-          <EntityTempForm onSubmit={this.handleOnSubmit} />
-        ) : null}
-      </div>
-    );
+    return <div>{this.getRender()}</div>;
   }
 }
 export default EntityTempHome;

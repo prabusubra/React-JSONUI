@@ -4,18 +4,21 @@ import FlatTableRow from "./FlatTableRow";
 
 class FlatTable extends Component {
   state = {
-    header: this.props.header || [],
-    data: this.props.data || []
+    header: [],
+    data: []
   };
-  render() {
-    this.state.data = this.props.data;
-    let tablerow = [];
-    this.state.data.forEach((element, index) => {
-      tablerow.push(
-        <FlatTableRow key={index} header={this.state.header} data={element} />
-      );
-    });
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    if (nextProps.data != prevState.data) {
+      return {
+        data: nextProps.data,
+        header: nextProps.header
+      };
+    }
+    return null;
+  }
+  render() {
     return (
       <div>
         <table className="table-responsive-xl table-bordered">
@@ -33,6 +36,7 @@ class FlatTable extends Component {
                   key={index}
                   header={this.state.header}
                   data={element}
+                  showProperties={this.props.showProperties}
                 />
               );
             })}
