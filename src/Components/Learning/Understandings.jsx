@@ -38,6 +38,7 @@ class ReactLifecycle extends Component {
    */
   componentDidMount() {
     console.log("DOM is ready...");
+    
   }
   /**
    * when?, Called once Component is removed from the HTML DOM.
