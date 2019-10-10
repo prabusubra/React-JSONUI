@@ -10,7 +10,7 @@ class FlatTableData extends Component {
     alpha: [{ name: "Tester", city: "Bengaluru" }]
   };
   render() {
-    let tabledata = JSON.stringify(this.state.data);
+    let tabledata = JSON.parse(JSON.stringify(this.state.data));
     //tabledata = tabledata.replace(/[!#$%^&*"{}]/g, "");
     // tabledata = tabledata.replace(/[\"]/g, "");
     let content;
