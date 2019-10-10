@@ -22,9 +22,6 @@ class AttrTempForm extends Component {
     console.log(this.props);
     return (
       <div className="m-4">
-        <button className="btn btn-primary m-4" onClick={this.props.onSubmit}>
-          Back
-        </button>
         <form className="m-4">
           <div className="form-group">
             <label htmlFor={"name"}> Name </label>{" "}
@@ -131,6 +128,9 @@ class AttrTempForm extends Component {
           <button className="btn btn-primary m-4" onClick={this.props.onSubmit}>
             Submit
           </button>
+          <button className="btn btn-outline-primary m-4" onClick={this.props.onSubmit}>
+            Cancel
+        </button>
         </form>
       </div>
     );
