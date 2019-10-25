@@ -73,7 +73,13 @@ class FlatTableData extends Component {
       );
     } else {
       if (typeof tabledata === "object") {
-        content = <td>{this.getFlatObjectData(tabledata)}</td>;
+        if (tabledata.constructor.name === "Array") {
+          content = tabledata.reduce(
+            (accumulator, element) => accumulator + ", " + element
+          );
+        } else {
+          content = <td>{this.getFlatObjectData(tabledata)}</td>;
+        }
       } else {
         content = <td>{tabledata}</td>;
       }
