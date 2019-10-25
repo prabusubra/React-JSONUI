@@ -57,7 +57,15 @@ class FlatTableData extends Component {
         </td>
       );
     } else {
-      content = <td>{tabledata}</td>;
+       if (typeof tabledata === "object") {
+        let innerObject = "";
+        for (let tabledatakey in tabledata) {
+          innerObject += tabledatakey + " : " + tabledata[tabledatakey];
+        }
+        content = <td>{innerObject}</td>;
+      } else {
+        content = <td>{tabledata}</td>;
+      }
     }
     return content;
   }
