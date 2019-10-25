@@ -43,15 +43,11 @@ class EntityTempHome extends React.Component {
       return <EntityTempForm onSubmit={this.handleOnSubmit} />;
     } else {
       return (
-        <React.Fragment>
-          {" "}
-          <CreateEntity doOnClick={this.doattronclick} />,
-          <FlatTable
-            header={header}
-            data={this.state.data}
-            showProperties={this.showProperties}
-          />{" "}
-        </React.Fragment>
+        <FlatTable
+          header={header}
+          data={this.state.data}
+          showProperties={this.showProperties}
+        />
       );
     }
   };
