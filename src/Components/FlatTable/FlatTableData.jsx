@@ -9,6 +9,21 @@ class FlatTableData extends Component {
     header: this.props.header,
     alpha: [{ name: "Tester", city: "Bengaluru" }]
   };
+
+  getFlatObjectData = (tabledata, result) => {
+    var innerObject = "";
+    for (let tabledatakey in tabledata) {
+      if (typeof tabledata[tabledatakey] !== "object") {
+        innerObject = innerObject
+          ? innerObject + ", " + tabledatakey + " : " + tabledata[tabledatakey]
+          : tabledatakey + " : " + tabledata[tabledatakey];
+      } else {
+        result = result ? result + ", " + innerObject : innerObject;
+        return this.getFlatObjectData(tabledata[tabledatakey], result);
+      }
+    }
+    return result;
+  };
   render() {
     let tabledata = JSON.parse(JSON.stringify(this.state.data));
     //tabledata = tabledata.replace(/[!#$%^&*"{}]/g, "");
@@ -57,7 +72,17 @@ class FlatTableData extends Component {
         </td>
       );
     } else {
-      content = <td>{tabledata}</td>;
+      if (typeof tabledata === "object") {
+        if (tabledata.constructor.name === "Array") {
+          content = tabledata.reduce(
+            (accumulator, element) => accumulator + ", " + element
+          );
+        } else {
+          content = <td>{this.getFlatObjectData(tabledata)}</td>;
+        }
+      } else {
+        content = <td>{tabledata}</td>;
+      }
     }
     return content;
   }
