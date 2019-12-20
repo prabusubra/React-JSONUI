@@ -1,13 +1,19 @@
-version: '1.0'
- steps:
-  Build
-   type: build
-   describtion: Building React-JSONUI
-   image-name: react-jsonui
-   working_directory: ./
-   tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
-   dockerfile: Dockerfile
-   no_cache: true
-   metadata: 
-    set:
-      - build_style: non-multi-stage
+version: "1.0"
+stages:
+  - "clone"
+  - "build"
+steps:
+  main_clone:
+    type: "git-clone"
+    description: "Cloning main repository..."
+    repo: "prabusubra/React-JSONUI"
+    revision: "${{CF_BRANCH}}"
+    stage: "clone"
+  build:
+    title: "Building Docker Image"
+    type: "build"
+    image_name: "prabusubra/React-JSONUI"
+    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+    dockerfile: "Dockerfile"
+    stage: "build"
+  
